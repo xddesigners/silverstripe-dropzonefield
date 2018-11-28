@@ -1,0 +1,72 @@
+{
+  "name": "silverstripe-dropzonefield",
+  "version": "1.0.0",
+  "description": "DropzoneJS frond-end upload field for SilverStripe.",
+  "homepage": "https://github.com/xddesigners/silverstripe-dropzonefield",
+  "keywords": [
+    "silverstripe",
+    "dropzone",
+    "dropzonejs",
+    "upload",
+    "file",
+    "uploadfield",
+    "filefield"
+  ],
+  "license": "BSD-3-Clause",
+  "author": "XD designers",
+  "contributors": [
+    {
+      "name": "Bram de Leeuw",
+      "email": "bram@xd.nl",
+      "url": "https://www.xd.nl/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xddesigners/silverstripe-dropzonefield.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xddesigners/silverstripe-dropzonefield/issues"
+  },
+  "scripts": {
+    "watch": "webpack --env.development --colors --watch",
+    "build": "webpack --env.production --colors --progress --optimize-minimize"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^8.2.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "dropzone": "^5.5.1",
+    "node-sass": "^4.8.3",
+    "postcss-loader": "^2.1.3",
+    "resolve-url-loader": "^2.3.0",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.11.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
