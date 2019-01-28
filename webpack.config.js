@@ -19,11 +19,6 @@ const BASE = '/silverstripe-dropzonefield';
 // Define Paths:
 
 const PATHS = {
-  ADMIN: {
-    SRC: path.resolve(__dirname, 'admin/client/src'),
-    DIST: path.resolve(__dirname, 'admin/client/dist'),
-    PUBLIC: BASE + '/admin/client/dist/'
-  },
   MODULE: {
     SRC: path.resolve(__dirname, 'client/src'),
     DIST: path.resolve(__dirname, 'client/dist'),
@@ -35,18 +30,6 @@ const PATHS = {
 // Define Configs:
 
 const CONFIGS = [
-  {
-    paths: PATHS.ADMIN,
-    entry: {
-      'bundle': 'bundles/bundle.js'
-    },
-    resolve: {
-      alias: {
-        'bootstrap': path.resolve(process.env.PWD, '../../silverstripe/admin/node_modules/bootstrap'),
-        'silverstripe-admin': path.resolve(process.env.PWD, '../../silverstripe/admin/client/src')
-      }
-    }
-  },
   {
     paths: PATHS.MODULE,
     entry: {
