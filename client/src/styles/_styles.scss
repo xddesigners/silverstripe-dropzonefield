@@ -1,9 +1,21 @@
-.dropzone {
-  margin: 0 0 1rem;
-  border-style: dashed;
-  border-radius: 10px;
 
-  + input {
-    display: none;
+.dropzone-field {
+  .dropzone {
+    margin: 0 0 1rem;
+    border-style: dashed;
+    border-radius: 10px;
+
+    + input {
+      display: none;
+    }
+  }
+
+  &--ie {
+    .dropzone {
+      display: none;
+      + input {
+        display: block;
+      }
+    }
   }
 }

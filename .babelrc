@@ -1,4 +1,5 @@
 {
+  plugins: ['transform-throw-expressions'],
   presets: [
     [
       'env',

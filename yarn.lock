@@ -409,6 +409,10 @@ babel-plugin-syntax-exponentiation-operator@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-exponentiation-operator/-/babel-plugin-syntax-exponentiation-operator-6.13.0.tgz#9ee7e8337290da95288201a6a57f4170317830de"
 
+babel-plugin-syntax-throw-expressions@7.0.0-beta.3:
+  version "7.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-syntax-throw-expressions/-/babel-plugin-syntax-throw-expressions-7.0.0-beta.3.tgz#a3469edbf3561b881ea8908d5a9232cbb4e0377a"
+
 babel-plugin-syntax-trailing-function-commas@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.22.0.tgz#ba0360937f8d06e40180a43fe0d5616fff532cf3"
@@ -609,6 +613,12 @@ babel-plugin-transform-strict-mode@^6.24.1:
   dependencies:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
+
+babel-plugin-transform-throw-expressions@^7.0.0-beta.3:
+  version "7.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-throw-expressions/-/babel-plugin-transform-throw-expressions-7.0.0-beta.3.tgz#89daad94f2fb5b671c75942bbdd527844751e711"
+  dependencies:
+    babel-plugin-syntax-throw-expressions "7.0.0-beta.3"
 
 babel-preset-env@^1.6.1:
   version "1.7.0"
