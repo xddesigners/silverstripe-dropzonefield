@@ -34,13 +34,6 @@ const CONFIGS = [
     paths: PATHS.MODULE,
     entry: {
       'bundle': 'bundles/bundle.js'
-    },
-    resolve: {
-      alias: {
-        'bootstrap': path.resolve(process.env.PWD, '../../../themes/silverware-theme/node_modules/bootstrap'),
-        'silverware-theme': path.resolve(process.env.PWD, '../../../themes/silverware-theme/source'),
-        'calendar-admin': path.resolve(process.env.PWD, 'admin/client/src')
-      }
     }
   }
 ];
@@ -59,9 +52,9 @@ const rules = (env) => {
           loader: 'babel-loader'
         }
       ],
-      exclude: [
-        PATHS.MODULES
-      ]
+      //exclude: [
+      //  PATHS.MODULES
+      //]
     },
     {
       test: /\.css$/,
