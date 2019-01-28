@@ -1,3 +1,13 @@
 {
-  presets: ['env']
+  presets: [
+    [
+      'env',
+      {
+        "targets": {
+          "chrome": "58",
+          "ie": "11"
+        }
+      }
+    ]
+  ]
 }
