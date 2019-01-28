@@ -6,6 +6,7 @@ const dropzoneFields = document.querySelectorAll('.field.dropzone-field');
 
 for (let dropzoneField of dropzoneFields) {
   if (!IE) {
+    dropzoneField.classList.add('dropzone-field--supported');
     const field = dropzoneField.querySelector('.dropzone');
     const input = dropzoneField.querySelector('input[type="file"]');
     const config = JSON.parse(input.attributes['dropzone-config'].value);
@@ -20,7 +21,5 @@ for (let dropzoneField of dropzoneFields) {
       input.value = response[0].id;
       dropzoneField.appendChild(input);
     });
-  } else {
-    dropzoneField.classList.add('dropzone-field--ie');
   }
 }

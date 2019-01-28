@@ -1,20 +1,17 @@
 
 .dropzone-field {
   .dropzone {
+    display: none;
     margin: 0 0 1rem;
     border-style: dashed;
     border-radius: 10px;
-
-    + input {
-      display: none;
-    }
   }
 
-  &--ie {
+  &--supported {
     .dropzone {
-      display: none;
+      display: block;
       + input {
-        display: block;
+        display: none;
       }
     }
   }
