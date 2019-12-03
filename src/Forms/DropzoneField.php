@@ -12,6 +12,8 @@ use SilverStripe\Core\Convert;
  */
 class DropzoneField extends UploadField
 {
+    private static $include_scripts_in_template = true;
+
     protected $dropzoneConfig = [
         'paramName' => 'Upload'
     ];
@@ -37,5 +39,10 @@ class DropzoneField extends UploadField
         $attributes = parent::getAttributes();
         $attributes['dropzone-config'] = $this->getDropzoneConfig();
         return $attributes;
+    }
+
+    public function getIncludeScripts()
+    {
+        return self::config()->get('include_scripts_in_template');
     }
 }
