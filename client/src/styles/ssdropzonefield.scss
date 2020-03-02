@@ -1,0 +1,20 @@
+@import "~dropzone/dist/basic.css";
+@import "~dropzone/dist/dropzone.css";
+
+.dropzone-field {
+  .dropzone {
+    display: none;
+    margin: 0 0 1rem;
+    border-style: dashed;
+    border-radius: 10px;
+  }
+
+  &--supported {
+    .dropzone {
+      display: block;
+      + input {
+        display: none;
+      }
+    }
+  }
+}
