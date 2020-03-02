@@ -1,6 +1,6 @@
 <% if $IncludeScripts %>
-    <% require javascript("xddesigners/silverstripe-dropzonefield:client/dist/js/bundle.js") %>
-    <% require css("xddesigners/silverstripe-dropzonefield:client/dist/styles/bundle.css") %>
+    <% require javascript("xddesigners/silverstripe-dropzonefield:client/dist/js/ssdropzonefield.js") %>
+    <% require css("xddesigners/silverstripe-dropzonefield:client/dist/styles/ssdropzonefield.css") %>
 <% end_if %>
 <div class="dropzone">
     <div class="dz-message" data-dz-message>
