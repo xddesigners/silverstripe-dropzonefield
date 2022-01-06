@@ -13,5 +13,13 @@ composer require xddesigners/silverstripe-dropzonefield
 XD\DropzoneField\Forms\DropzoneField::create('Image');
 ```
 
+## Enable frontend editing of image object
+```php
+DropzoneField::create('Image', _t(__CLASS__ . '.Image', 'Profile image'), $this->Image() )
+    ->setFolderName('profile')
+    ->setIsMultiUpload(false)
+    ->setAddRemoveLinks(true);
+```
+
 ### Maintainers 
 [Bram de Leeuw](https://www.twitter.com/bramdeleeuw)
