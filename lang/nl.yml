@@ -1,3 +1,4 @@
 nl:
   XD\DropzoneField\Forms\DropzoneField:
-    DZMessage: 'Sleep bestanden hiernaartoe om te uploaden'
+    DZMessage: 'Sleep bestand(en) om te uploaden'
+    RemoveFile: 'Verwijder bestand'

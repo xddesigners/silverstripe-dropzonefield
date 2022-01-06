@@ -7,6 +7,14 @@
     margin: 0 0 1rem;
     border-style: dashed;
     border-radius: 10px;
+
+    .dz-preview .dz-image{
+      border-radius: 0;
+      img{
+        margin: 0 auto;
+      }
+    }
+
   }
 
   &--supported {
@@ -17,4 +25,5 @@
       }
     }
   }
+
 }
