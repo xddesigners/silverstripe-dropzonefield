@@ -29,7 +29,7 @@ class DropzoneField extends UploadField
         } elseif (is_array($items)) {
             // array input
             $items = ArrayList::create($items);
-        } else {
+        } elseif( !empty($items) ) {
             // dataobject
             $items = ArrayList::create([$items]);
         }
