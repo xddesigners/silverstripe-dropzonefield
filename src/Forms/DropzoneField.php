@@ -49,15 +49,25 @@ class DropzoneField extends UploadField
 
     public function getDropzoneConfig()
     {
+        $config = $this->dropzoneConfig;
+        
+        // setup uploadfield uptions to dropzone options
+        $config['maxFilesize'] = $this->getAllowedMaxFileSize() / 1024 / 1024;
+        $config['maxFiles'] = !$this->getIsMultiUpload() ? 1 : $this->getAllowedMaxFileNumber();;
+
         $token = $this->getForm()->getSecurityToken();
-        return Convert::array2json(array_merge_recursive($this->dropzoneConfig, [
+        return json_encode(array_merge_recursive($config, [
             'url' => $this->Link('upload'),
-            'addRemoveLinks' => $this->addRemoveLinks,
-            'dictRemoveFile' => _t(__CLASS__ . '.RemoveFile', 'Remove file'),
             'headers' => [
                 'X-' . $token->getName() => $token->getValue()
             ],
         ]));
+    }
+
+    public function addDropzoneConfig($key, $value) 
+    {
+        $this->dropzoneConfig[$key] = $value;
+        return $this;
     }
 
     public function getAttributes()
