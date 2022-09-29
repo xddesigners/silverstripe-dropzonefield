@@ -3,8 +3,12 @@
 namespace XD\DropzoneField\Forms;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
+use SilverStripe\Versioned\Versioned;
 
 /**
  * Class DropzoneField
@@ -15,7 +19,9 @@ class DropzoneField extends UploadField
 {
     private static $include_scripts_in_template = true;
 
-    public $addRemoveLinks = false;
+    private static $allowed_actions = [
+        'remove'
+    ];
 
     protected $dropzoneConfig = [
         'paramName' => 'Upload'
@@ -23,21 +29,54 @@ class DropzoneField extends UploadField
 
     public function __construct($name, $title = null, $items = null)
     {
-        if ($items instanceof SS_List) {
-            // SS_List input
-        } elseif (is_array($items)) {
-            // array input
-            $items = ArrayList::create($items);
-        } elseif( !empty($items) ) {
-            // dataobject
-            $items = ArrayList::create([$items]);
+        if ($items && !$items instanceof SS_List) {
+            if (!is_array($items)) {
+                $items = [$items];
+            }
+
+            $items = ArrayList::create($items);            
         }
+
         parent::__construct($name, $title, $items);
+    }
+
+    public function remove(HTTPRequest $request)
+    {
+        if ($this->isDisabled() || $this->isReadonly()) {
+            return $this->httpError(403);
+        }
+
+        // CSRF check
+        $token = $this->getForm()->getSecurityToken();
+        if (!$token->checkRequest($request)) {
+            return $this->httpError(400);
+        }
+
+        if (!$body = $request->getBody()) {
+            return $this->httpError(400);
+        }
+
+        $body = json_decode($body, true);
+        if (!isset($body['fileId'])) {
+            return $this->httpError(400);
+        }
+
+        $fileId = $body['fileId'];
+        /** @var Image|Versioned $image */
+        $image = Image::get_by_id($fileId);
+        if (!$image || !$image->exists()) {
+            return $this->httpError(400);
+        }
+
+        // remove the file
+        $image->doArchive();        
+        return (new HTTPResponse(json_encode(['removedFile' => $fileId])))
+            ->addHeader('Content-Type', 'application/json');
     }
 
     public function setAddRemoveLinks(bool $bool)
     {
-        $this->addRemoveLinks = $bool;
+        $this->addDropzoneConfig('addRemoveLinks', $bool);
         return $this;
     }
 
@@ -57,6 +96,7 @@ class DropzoneField extends UploadField
         $token = $this->getForm()->getSecurityToken();
         return json_encode(array_merge_recursive($config, [
             'url' => $this->Link('upload'),
+            'removeUrl' => $this->Link('remove'),
             'headers' => [
                 'X-' . $token->getName() => $token->getValue()
             ],

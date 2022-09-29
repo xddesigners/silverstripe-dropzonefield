@@ -1,4 +1,5 @@
-import Dropzone from 'dropzone/dist/min/dropzone.min';
+// import Dropzone from 'dropzone/dist/min/dropzone.min';
+import { Dropzone } from "dropzone";
 Dropzone.autoDiscover = false;
 
 const IE = navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1);
@@ -15,10 +16,21 @@ for (let dropzoneField of dropzoneFields) {
     const schema = JSON.parse(input.attributes['data-schema'].value);
     const state = JSON.parse(input.attributes['data-state'].value);
 
+    console.log('config', config);
+
     const dropzone = new Dropzone(field, config);
     dropzone.on("removedfile", file => {
-      // empty hiddenfields in dropzone-items
-      dropzoneField.querySelector('.dropzone-items').innerHTML = "";
+      
+      console.log('removedfile', file);
+
+      if (config.hasOwnProperty('removeUrl')) {
+        const req = new XMLHttpRequest();
+        req.open('POST', config.removeUrl);
+        for (const [key, value] of Object.entries(config.headers)) {
+          req.setRequestHeader(key, value);
+        }
+        req.send(JSON.stringify({fileId: file.serverId}));
+      }
     });
 
     if (typeof state.data.files !== 'undefined' && state.data.files.length > 0) {
@@ -31,6 +43,7 @@ for (let dropzoneField of dropzoneFields) {
       input.type = 'hidden';
       input.name = `${schema.name}[Files][]`;
       input.value = response[0].id;
+      file.serverId = response[0].id;
       dropzoneField.appendChild(input);
     });
   }
