@@ -3,7 +3,6 @@
 namespace XD\DropzoneField\Forms;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Core\Convert;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
 
