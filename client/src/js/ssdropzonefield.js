@@ -26,7 +26,8 @@ if (!IE) {
         for (const [key, value] of Object.entries(config.headers)) {
           req.setRequestHeader(key, value);
         }
-        req.send(JSON.stringify({fileId: file.serverId}));
+        const fileId = file.id > 0 ? file.id : file.serverId;
+        req.send(JSON.stringify({fileId}));
       }
     });
 
