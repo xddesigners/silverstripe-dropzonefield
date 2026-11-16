@@ -8,6 +8,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
+use SilverStripe\Security\Security;
 use SilverStripe\Versioned\Versioned;
 
 /**
@@ -68,8 +69,17 @@ class DropzoneField extends UploadField
             return $this->httpError(400);
         }
 
+        // Only the uploader (file owner) or someone allowed to archive the file may remove it. Without this check
+        // any logged-in member could archive every image on the site by posting fileId 1..N.
+        $member = Security::getCurrentUser();
+        $isOwner = $member && (int) $image->OwnerID > 0 && (int) $image->OwnerID === (int) $member->ID;
+        $canArchive = $image->hasMethod('canArchive') ? $image->canArchive($member) : $image->canDelete($member);
+        if (!$isOwner && !$canArchive) {
+            return $this->httpError(403);
+        }
+
         // remove the file
-        $image->doArchive();        
+        $image->doArchive();
         return (new HTTPResponse(json_encode(['removedFile' => $fileId])))
             ->addHeader('Content-Type', 'application/json');
     }
